@@ -7,10 +7,10 @@ console.log("It has begun");
 
 var input = [
 	'username',
-	'password',
-	'First name',
-	'Last name',
+	'Firstname',
+	'Lastname',
 	'age',
+	'BirthMonth', 'BirthDay', 'BirthYear',
 	'hair colour',
 	'Favourite food'
 ]
@@ -31,7 +31,11 @@ prompt.get(input, function(err, result) {
 
 		var jsonString = JSON.stringify(account);
 
-		var accountLocation = './accounts/'+result.username+'.json'
+		if (!fs.existsSync('./accounts')) {
+			fs.mkdirSync('./accounts')
+		}
+
+		var accountLocation = './accounts/'+result.Lastname+','+result.Firstname+','+result.BirthDay+':'+result.BirthMonth+':'+result.BirthYear+'.json'
 
 		fs.writeFile(accountLocation, jsonString, 'utf-8');
 
