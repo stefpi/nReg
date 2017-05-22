@@ -29,7 +29,7 @@ prompt.get(input, function(err, result) {
 			account.result = result
 		};
 
-		var jsonString = JSON.stringify(account);
+		var jsonString = JSON.stringify(account, null, 2);
 
 		if (!fs.existsSync('./accounts')) {
 			fs.mkdirSync('./accounts')
