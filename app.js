@@ -1,5 +1,7 @@
 const prompt = require('prompt');
 const fs = require('fs');
+const passwordHash = require('password-hash');
+const confirm = require('prompt-confirm');
 
 prompt.start();
 
@@ -21,9 +23,6 @@ prompt.get(input, function(err, result) {
 	if (err) {
 		console.log(err);
 	} else {
-		console.log("Account has been registered");
-		// console.log("	Username:" + result.username);
-		// console.log("	password:" + result.password);
 		var account = {};
 		for (var userIn in input) {
 			account.result = result
@@ -35,24 +34,31 @@ prompt.get(input, function(err, result) {
 			fs.mkdirSync('./accounts')
 		}
 
-		var accountLocation = './accounts/'+result.Lastname+','+result.Firstname+','+result.BirthDay+':'+result.BirthMonth+':'+result.BirthYear+'.json'
+		var accountLocation = './accounts/'+result.Firstname+':'+result.Lastname+';'+result.BirthDay+':'+result.BirthMonth+':'+result.BirthYear+'.json'
 
-		fs.writeFile(accountLocation, jsonString, 'utf-8');
+			if (!fs.existsSync(accountLocation)){
+				fs.writeFile(accountLocation, jsonString, 'utf-8');
+				console.log('Your account has been stored in ' +  accountLocation);
+			} else {
+				console.log('Your account already exists...')
+				var login = new confirm({
+					type: 'confirm',
+					name: 'login',
+					message: 'Would you like to login?'
+				});
 
-		console.log('Your account has been stored in ' +  accountLocation);
+				console.log(login);
+
+				
+
+
+
+
+		}
+
 
 	}
 });
 
-// if (name === string) {
-// 	confirm('Are you ready to continue to the site?');
-// } else {
-// 	console.log('That is not a real name... please enter your name...');
-// 	var name2 = prompt("What's your name?");
-
-// 	if (name2 === string) {
-// 		confirm('Are you ready to continue to the site?');
-// 	}
-// }
 
 // prompt('Enter your age');

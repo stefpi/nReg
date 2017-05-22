@@ -9,6 +9,8 @@
   "author": "stefpi",
   "license": "MIT",
   "dependencies": {
-    "prompt": "^1.0.0"
+    "password-hash": "^1.2.2",
+    "prompt": "^1.0.0",
+    "prompt-confirm": "^1.0.0"
   }
 }
